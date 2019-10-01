@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './home/home.dart';
 import './newClient/newClient.dart';
 import './clientList/clientList.dart';
+import './ClientDetail/ClientDetail.dart';
 void main()=> runApp(MyApp());
 
 class MyApp extends StatelessWidget{
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget{
       routes: {
         Home().routeName: (context) => Home(),
         ClientList().routeName: (context) => ClientList(),
-        // ClientDetail().routeName: (context) => ClientDetail(),
+        ClientDetail().routeName: (context) => ClientDetail(),
         NewClient().routeName: (context) => NewClient(),
       }
       
