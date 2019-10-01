@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../share/appBar.dart';
 import '../share/contactInfo.dart';
+//random comment
 class ClientDetail extends StatelessWidget{
   String routeName='/ClientDetail';
   String name;
