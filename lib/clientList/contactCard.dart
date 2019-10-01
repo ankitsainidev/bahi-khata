@@ -6,12 +6,12 @@ class ContactCard extends StatelessWidget {
   ContactCard(this.data);
   @override
   Widget build(BuildContext context) {
+
     return MaterialButton(
       onPressed: () {
         Navigator.pushNamed(context, '/ClientDetail', arguments: this.data);
       },
-      child: Card(
-        child: Row(
+      child:  Row(
           children: <Widget>[
             Icon(Icons.person),
             Expanded(
@@ -28,7 +28,7 @@ class ContactCard extends StatelessWidget {
             Text('by'),
           ],
         ),
-      ),
+      
     );
   }
 }

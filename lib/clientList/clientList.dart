@@ -17,15 +17,22 @@ class ClientList extends StatelessWidget {
       appBar: MyAppBar.getAppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, '/ClientDetail');
+          Navigator.pushNamed(context, '/newClient');
         },
         child: Icon(Icons.person_add),
       ),
-      body: ListView.builder(
-        itemCount: 300,
-        itemBuilder: (ctxt, index) =>
-            ContactCard(ContactInfo(this.contacts[index])),
+      body: ListView.separated(
+        itemCount: 1000,
+        separatorBuilder: (context, index){
+          return Divider(color: Colors.grey[400],);
+        },
+
+        
+        itemBuilder: (ctxt, index){
+          print(index);
+            return ContactCard(ContactInfo('idex'+index.toString()));},
       ),
+      
     );
   }
 }

@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
       body: Column(
         children: <Widget>[
           CardButton('CLIENT',nextRoute: '/clientList'),
-          CardButton('PAYABLE'),
+          CardButton('PAYABLE',nextRoute: '/login',),
           CardButton('REVENUE'),
         ],
           
