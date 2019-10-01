@@ -6,25 +6,28 @@ class ContactCard extends StatelessWidget {
   ContactCard(this.data);
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: <Widget>[
-          Icon(Icons.person),
-          Expanded(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-          
-            
-            child: Column(
-              
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              Text(data.name),
-              Text(data.contact),
-            ]),
-          ),),
-          Text('by'),
-        ],
+    return MaterialButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/ClientDetail', arguments: this.data);
+      },
+      child: Card(
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.person),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(data.name),
+                      Text(data.contact),
+                    ]),
+              ),
+            ),
+            Text('by'),
+          ],
+        ),
       ),
     );
   }
