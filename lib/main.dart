@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './home/home.dart';
 import './newClient/newClient.dart';
 import './clientList/clientList.dart';
+import './ClientDetail/ClientDetail.dart';
 void main()=> runApp(MyApp());
 class MyApp extends StatelessWidget{
   @override
