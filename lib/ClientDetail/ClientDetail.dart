@@ -14,7 +14,7 @@ class ClientDetail extends StatelessWidget{
         child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[Text(this.name),Text(this.number),Text(this.transaction)],
-      ),,
+      ),
       )
     );
   }
