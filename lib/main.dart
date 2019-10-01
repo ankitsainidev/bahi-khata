@@ -7,9 +7,6 @@ void main()=> runApp(MyApp());
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    //my first contribution
-    //first contribution from other laptop
-    //OK
     return MaterialApp(
       initialRoute: Home().routeName,
       routes: {
