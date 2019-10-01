@@ -17,7 +17,7 @@ class ClientList extends StatelessWidget {
       appBar: MyAppBar.getAppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, '/newClient');
+          Navigator.pushNamed(context, '/ClientDetail');
         },
         child: Icon(Icons.person_add),
       ),

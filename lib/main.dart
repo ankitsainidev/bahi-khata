@@ -3,7 +3,6 @@ import './home/home.dart';
 import './newClient/newClient.dart';
 import './clientList/clientList.dart';
 void main()=> runApp(MyApp());
-
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -12,10 +11,10 @@ class MyApp extends StatelessWidget{
       routes: {
         Home().routeName: (context) => Home(),
         ClientList().routeName: (context) => ClientList(),
-        // ClientDetail().routeName: (context) => ClientDetail(),
+        ClientDetail().routeName: (context) => ClientDetail(),
         NewClient().routeName: (context) => NewClient(),
       }
-      
+
     );
   }
 }
