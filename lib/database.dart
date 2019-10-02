@@ -19,10 +19,13 @@ class DatabaseClient {
 
   Future _create(Database db, int version) async {
     await db.execute("""
-                  CREATE TABLE transaction (
+                  CREATE TABLE transac (
                   id INTEGER PRIMARY KEY,
                   client_id INTEGER NOT NULL,
                   amount INTEGER NOT NULL,
+                  
+                  date TEXT NOT NULL,
+                  time TEXT NOT NULL,
                   FOREIGN KEY (client_id) REFERENCES client (id)
                     ON DELETE NO ACTION ON UPDATE NO ACTION)""");
     await db.execute("""
