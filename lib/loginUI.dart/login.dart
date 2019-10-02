@@ -7,7 +7,9 @@ class Login extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: MyAppBar.getAppBar(),
-      body: Text('hyy'),
+      body: Center(child: MaterialButton(child: Text('Login'),onPressed: (){
+        Navigator.pushReplacementNamed(context, '/home');
+      },))
       );
   }
 }

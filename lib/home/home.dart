@@ -4,7 +4,7 @@ import './cardButton.dart';
 
 import '../share/appBar.dart';
 class Home extends StatelessWidget {
-  final String routeName='/';
+  final String routeName='/home';
   @override
   Widget build(BuildContext context){
     return Scaffold(

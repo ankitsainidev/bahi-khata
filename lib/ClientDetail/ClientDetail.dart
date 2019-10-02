@@ -3,6 +3,7 @@ import '../share/appBar.dart';
 import '../share/contactInfo.dart';
 import './text.dart';
 import './alltrans.dart';
+import 'dart:async';
 
 //random comment
 //ano
@@ -17,6 +18,7 @@ class ClientDetail extends StatelessWidget {
     this.name = info.name;
     this.number = info.contact;
     this.transaction = info.transaction;
+    
     return Scaffold(
         appBar: MyAppBar.getAppBar(),
         body: Column(children: [
