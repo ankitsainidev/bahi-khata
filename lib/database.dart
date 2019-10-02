@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+// import 'package:bahi_khata/models.dart' as prefix0;
+// import 'package:bahi_khata/models.dart' as prefix0;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import './models.dart';
+import 'models.dart';
 
 class DatabaseClient {
   Database _db;
@@ -40,5 +44,49 @@ class DatabaseClient {
       password TEXT NOT NULL,
       
       )""");
+  }
+  Future<User> upsertUser(User user) async{
+    var count = Sqflite.firstIntValue(await _db.rawQuery("SELECT COUNT(*) FROM user WHERE mobile = ?",[user.mobile]));
+    if(count==0){
+      user.id =await _db.insert("user", user.toMap());
+
+    }else{
+      await _db.update("user", user.toMap(),where: "id = ?", whereArgs: [user.id]);
+    }
+    return user;
+  }
+  Future<Transac> upsertTransaction(Transac transaction) async {
+    if(transaction.id !=null){
+      await _db.update('transac', transaction.toMap());
+
+    }else{
+      transaction.id = await _db.insert("transac", transaction.toMap());
+    }
+    return transaction;
+  }
+  Future<Client> upsertClient(Client client) async{
+    if(client.id!=null){
+      await _db.update('client', client.toMap());
+    }else{
+      client.id = await _db.insert('client', client.toMap());
+    }
+    return client;
+  }
+  Future<List<Client>> fetchClientsOfUser(User user) async{
+    List<Map> clients = await _db.query('client',columns: Client.columns,where: "user_id = ?",whereArgs: [user.id],orderBy: "id");
+    return clients.map((client)=>Client.fromMap((client)));
+  }
+  Future<List<Transac>> fetchTransacOfClient(Client client) async{
+    List<Map> transacs = await _db.query('transac',columns: Transac.columns,where: "client_id = ?",whereArgs: [client.id]);
+    return transacs.map((transac)=>Client.fromMap(transac));
+  }
+  Future<User> fetchUser(String mobile) async{
+    var count = Sqflite.firstIntValue(await _db.rawQuery("SELECT COUNT(*) FROM user WHERE mobile = ?",[mobile]));
+    if(count !=0){
+    var user = await _db.query('user',columns: User.columns,where: "mobile = ?", whereArgs: [mobile]);}
+    else{
+      throw new Exception('user not found');
+    }
+    
   }
 }
