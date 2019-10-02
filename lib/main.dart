@@ -3,7 +3,6 @@ import './home/home.dart';
 import './newClient/newClient.dart';
 import './clientList/clientList.dart';
 import './ClientDetail/ClientDetail.dart';
-import './listtry.dart';
 import './loginUI.dart/login.dart';
 void main()=> runApp(MyApp());
 class MyApp extends StatelessWidget{
