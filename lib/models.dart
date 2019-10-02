@@ -41,11 +41,53 @@ class User{
   String password;
   static final columns = ['id','name','mobile','email','password'];
   Map toMap(){
-    Map map{
-      ''
+    Map map={
+      'name': name,
+      'mobile': mobile,
+      'email': email,
+      'password': Password.hash(password, PBKDF2()),
+    };
+    if(id!=null){
+      map['id'] =id;
     }
+    return map;
+  }
+  static fromMap(Map map){
+    User user = User();
+    user.id = map['id'];
+    user.name = map['name'];
+    user.mobile = map['mobile'];
+    user.email = map['email'];
+    user.password = map['password'];
+    return user;
   }
 }
-class Transaction{
-
+class Transac{
+  int id;
+  int clientId;
+  int amount;
+  String time;
+  String date;
+  static final columns = ['id','clientId','amount','time','date'];
+  Map toMap(){
+    Map map = {
+      'client_id': clientId,
+      'amount': amount,
+      'time': time,
+      'date': date,
+    };
+    if(id!=null){
+      map['id'] = id;
+    }
+    return map;
+  }
+  static fromMap(Map map){
+    Transac transac = Transac();
+    transac.id = map['id'];
+    transac.amount = map['amount'];
+    transac.date = map['date'];
+    transac.time = map['time'];
+    transac.clientId = map['client_id'];
+    return transac;
+  }
 }
