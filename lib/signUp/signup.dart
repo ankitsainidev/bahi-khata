@@ -14,20 +14,26 @@ class SignUpPage extends StatelessWidget {
         TextField(
           controller: emailController,
         ),
-        TextField(controller: passwordController,),
-        MaterialButton(onPressed: () async{
-          try{
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text,password: passwordController.text);
-            
-          }catch(PlatformException){
-            print('hii');
-          }
-          await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text,password: passwordController.text);
-          FirebaseUser user = await FirebaseAuth.instance.currentUser();
-          user.sendEmailVerification();
-          await FirebaseAuth.instance.signOut();
-          Navigator.pushNamed(context, '/login', arguments: true);
-        },)
+        TextField(
+          controller: passwordController,
+        ),
+        MaterialButton(
+          onPressed: () async {
+            try {
+              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                  email: emailController.text,
+                  password: passwordController.text);
+            } catch (PlatformException) {
+              print('hii');
+            }
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+            FirebaseUser user = await FirebaseAuth.instance.currentUser();
+            user.sendEmailVerification();
+            await FirebaseAuth.instance.signOut();
+            Navigator.pushNamed(context, '/login', arguments: true);
+          },
+        ),
       ],
     ));
   }
