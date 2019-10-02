@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-import './main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<bool> authenticated() async {
+  FirebaseUser authenticated = await FirebaseAuth.instance.currentUser();
+  print(authenticated);
+  
+  bool auth = authenticated != null;
+  
+  return auth;
+}
+
 void wait(int sec, BuildContext context) async {
   await Future.delayed(Duration(seconds: sec));
-  
-  Navigator.pushReplacementNamed(context, authenticated?'/home':'/login');
-  
+  bool auth = await authenticated();
+  Navigator.pushReplacementNamed(context, auth ? '/home' : '/login');
 }
 
 class LandingPage extends StatelessWidget {
   String routeName = '/';
   @override
   Widget build(BuildContext context) {
+    
     wait(3, context);
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],

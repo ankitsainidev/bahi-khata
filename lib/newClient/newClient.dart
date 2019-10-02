@@ -7,7 +7,7 @@ class NewClient extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: MyAppBar.getAppBar(),
+      appBar: MyAppBar.getAppBar(context),
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [

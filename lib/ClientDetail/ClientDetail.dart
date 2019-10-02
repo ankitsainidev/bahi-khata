@@ -20,7 +20,7 @@ class ClientDetail extends StatelessWidget {
     this.transaction = info.transaction;
     
     return Scaffold(
-        appBar: MyAppBar.getAppBar(),
+        appBar: MyAppBar.getAppBar(context),
         body: Column(children: [
           Container(
             padding: EdgeInsets.all(0),

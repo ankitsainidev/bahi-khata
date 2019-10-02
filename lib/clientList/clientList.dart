@@ -14,7 +14,7 @@ class ClientList extends StatelessWidget {
       contacts.addAll(another);
     }
     return Scaffold(
-      appBar: MyAppBar.getAppBar(),
+      appBar: MyAppBar.getAppBar(context),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.pushNamed(context, '/newClient');

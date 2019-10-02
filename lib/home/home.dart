@@ -8,7 +8,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: MyAppBar.getAppBar(),
+      appBar: MyAppBar.getAppBar(context),
       body: Column(
         children: <Widget>[
           CardButton('CLIENT',nextRoute: '/clientList'),
