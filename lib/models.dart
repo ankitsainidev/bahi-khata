@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:password/password.dart';
 class Client{
-  Client();
   int id;
   int userId;
   int mobile;

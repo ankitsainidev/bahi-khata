@@ -86,10 +86,12 @@ class DatabaseClient {
   Future<User> fetchUser(String mobile) async{
     var count = Sqflite.firstIntValue(await _db.rawQuery("SELECT COUNT(*) FROM user WHERE mobile = ?",[mobile]));
     if(count !=0){
-    var user = await _db.query('user',columns: User.columns,where: "mobile = ?", whereArgs: [mobile]);}
+    var user = await _db.query('user',columns: User.columns,where: "mobile = ?", whereArgs: [mobile]);
+    return User.fromMap(user[0]);}
     else{
       throw new Exception('user not found');
     }
-    
   }
 }
+
+
