@@ -8,6 +8,7 @@ import '../models.dart';
 import '../database.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'newtransform.dart';
+
 //random comment
 //ano
 class ClientDetail extends StatelessWidget {
@@ -22,22 +23,22 @@ class ClientDetail extends StatelessWidget {
     return Scaffold(
         appBar: MyAppBar.getAppBar(context, widgets: [
           MaterialButton(
-            child: Icon(Icons.add_box),
-            onPressed: () async {
-              showDialog(
+              child: Icon(Icons.add_box),
+              onPressed: () async {
+                showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return Center(
-                      
                         child: Wrap(
-                          // constraints: BoxConstraints.tightFor(),
-                          children: [Card(
-                                
-                                child: NewTransForm(client),
-                    )])
-                  );
-            },);})
-          
+                            // constraints: BoxConstraints.tightFor(),
+                            children: [
+                          Card(
+                            child: NewTransForm(client),
+                          )
+                        ]));
+                  },
+                );
+              })
         ]),
         body: Column(children: [
           Container(
@@ -106,9 +107,11 @@ class ClientDetail extends StatelessWidget {
           ),
           Expanded(
               child: Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(blurRadius: 10, color: Colors.blueGrey[100])
-                  ]),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(blurRadius: 10, color: Colors.blueGrey[100])
+                    ],
+                  ),
                   margin: EdgeInsets.all(10),
                   child: Card(
                     elevation: 0,

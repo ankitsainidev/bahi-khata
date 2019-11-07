@@ -12,7 +12,7 @@ class ClientList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Client>>(
-      future: mydb.clients(),
+      future: mydb.clients(filter: ModalRoute.of(context).settings.arguments!=null?ModalRoute.of(context).settings.arguments:0),
       builder: (BuildContext context, AsyncSnapshot<List<Client>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:

@@ -17,9 +17,10 @@ class Home extends StatelessWidget {
               CardButton('CLIENT', nextRoute: '/clientList'),
               CardButton(
                 'PAYABLE',
-                nextRoute: '/login',
+                nextRoute: '/clientList',
+                argument: -1,
               ),
-              CardButton('REVENUE'),
+              CardButton('REVENUE',nextRoute: '/clientList',argument: 1,),
               MaterialButton(
                 onPressed: () async {
                   DatabaseClient mydb = DatabaseClient();

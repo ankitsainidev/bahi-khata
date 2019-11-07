@@ -39,10 +39,11 @@ class DatabaseClient {
       mobile TEXT NOT NULL UNIQUE,
       email TEXT UNIQUE)""");
   }
+
   Future<List<Transac>> transactionsOfClient(int clientId) async {
-    List<Map<String,dynamic>> maps = await _db.query('transac',where: "client_id = ?",whereArgs: [clientId],orderBy: '-id');
-    return List.generate(maps.length, (i){
-      
+    List<Map<String, dynamic>> maps = await _db.query('transac',
+        where: "client_id = ?", whereArgs: [clientId], orderBy: '-id');
+    return List.generate(maps.length, (i) {
       return Transac(
         id: maps[i]['id'],
         clientId: maps[i]['client_id'],
@@ -53,39 +54,70 @@ class DatabaseClient {
       );
     });
   }
-  Future<void> insertTranscation(Transac trans) async{
+
+  Future<void> insertTranscation(Transac trans) async {
     // final Database mydb = _db;
-    await _db.insert('transac',trans.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-  Future<dynamic> runSql(String query)async{
-    return _db.execute(query);
-  }
-  Future<void> deleteTransaction(Transac trans) async{
-    final Database mydb = _db;
-    await mydb.delete('transac',where: "id = ?",whereArgs: [trans.id]);
+    await _db.insert('transac', trans.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<void> insertClient(Client client) async{
+  Future<dynamic> runSql(String query) async {
+    return _db.execute(query);
+  }
+
+  Future<void> deleteTransaction(Transac trans) async {
     final Database mydb = _db;
-    await mydb.insert('client', client.toMap(),conflictAlgorithm: ConflictAlgorithm.replace);
+    await mydb.delete('transac', where: "id = ?", whereArgs: [trans.id]);
   }
-  Future<List<Client>> clients() async{
+
+  Future<void> insertClient(Client client) async {
+    final Database mydb = _db;
+    await mydb.insert('client', client.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<List<Client>> clients({int filter = 0}) async {
     final Database mydb = await _db;
-    final List<Map<String,dynamic>> maps = await mydb.query('client',orderBy: '-id');
-    return List.generate(maps.length, (i){
-      return Client(
-        id: maps[i]['id'],
-        name: maps[i]['name'],
-        email: maps[i]['email'],
-        mobile: maps[i]['mobile'],
-      );
-    });
+    final List<Map<String, dynamic>> maps =
+        await mydb.query('client', orderBy: '-id');
+    final List<Client> clients = List.generate(maps.length, (i) {
+          return Client(
+            id: maps[i]['id'],
+            name: maps[i]['name'],
+            email: maps[i]['email'],
+            mobile: maps[i]['mobile'],
+          );
+        });
+    List<Client> modmaps=[];
+    switch (filter) {
+      case 0:
+        modmaps = clients;
+        break;
+      case 1:
+        for(int i=0;i<clients.length;i++){
+          if(0 < await clients[i].getAmount()){
+            modmaps.add(clients[i]);
+          }
+        }
+        break;
+      case -1:
+        for(int i=0;i<clients.length;i++){
+          if(0> await clients[i].getAmount()){
+            modmaps.add(clients[i]);
+          }
+        }
+
+    }
+    return modmaps;
   }
-  Future<void> deleteClient(Client client) async{
-    await _db.delete('client',where: "id = ?",whereArgs: [client.id]);
+
+  Future<void> deleteClient(Client client) async {
+    await _db.delete('client', where: "id = ?", whereArgs: [client.id]);
   }
-  Future<void> updateClient(Client client) async{
-    await _db.update('dogs',client.toMap(),where: "id = ?", whereArgs: [client.id]);
+
+  Future<void> updateClient(Client client) async {
+    await _db.update('dogs', client.toMap(),
+        where: "id = ?", whereArgs: [client.id]);
   }
   // Future<Client> upsertClient(Client client) async {
   //   if (client.id != null) {

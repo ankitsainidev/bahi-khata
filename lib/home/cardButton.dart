@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CardButton extends StatelessWidget{
   final String _value;
   final String nextRoute;
-  CardButton(this._value,{this.nextRoute: '/'});
+  final int argument;
+  CardButton(this._value,{this.nextRoute: '/',this.argument: 0 });
   @override
   Widget build(BuildContext context) {
    
@@ -16,7 +17,7 @@ class CardButton extends StatelessWidget{
         height: double.infinity,
         child: Center(child: Text(this._value),),
         onPressed: (){
-          Navigator.pushNamed(context, this.nextRoute,); 
+          Navigator.pushNamed(context, this.nextRoute,arguments: argument); 
         },
       ),
     );

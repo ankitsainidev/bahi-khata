@@ -22,6 +22,7 @@ class Client {
     }
     return sum;
   }
+  
   Map<String, dynamic> toMap() {
     return {
       'id': id,
