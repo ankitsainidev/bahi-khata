@@ -11,6 +11,7 @@ class SignUpPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('New Account'),
+        backgroundColor: Colors.teal[600],
       ),
       body: NewAccount(),
     );
@@ -61,6 +62,9 @@ class NewAccountState extends State<NewAccount> {
       key: _formkey,
       child: Column(
         children: <Widget>[
+          Padding(
+            padding:EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+            child:
           TextFormField(
             onChanged: (value){
               _email = value;
@@ -72,8 +76,11 @@ class NewAccountState extends State<NewAccount> {
               }
               return null;
             },
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
+            decoration: mydecoration('Email',Colors.teal[600]),
+          )),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+            child:
           TextFormField(
             validator: (value) {
               if (value.isEmpty) {
@@ -86,8 +93,11 @@ class NewAccountState extends State<NewAccount> {
             },
             autocorrect: false,
             obscureText: true,
-            decoration: InputDecoration(labelText: 'Password'),
-          ),
+            decoration: mydecoration('password', Colors.teal[600]),
+          ),),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+            child:
           TextFormField(
             validator: (value) {
               if (value != _password) {
@@ -97,9 +107,10 @@ class NewAccountState extends State<NewAccount> {
             },
             autocorrect: false,
             obscureText: true,
-            decoration: InputDecoration(labelText: 'Confirm Password'),
-          ),
-          MaterialButton(
+            decoration: mydecoration('Confirm Password',Colors.teal[600]),
+          )),
+          RaisedButton(
+            color: Colors.teal[100],
             child: Text("Create Account"),
             onPressed: () {
               
@@ -167,3 +178,11 @@ class NewAccountState extends State<NewAccount> {
 //     )));
 //   }
 // }
+
+InputDecoration mydecoration(label,color){
+  return InputDecoration(labelText: label,
+  labelStyle: TextStyle(color: Colors.black),
+  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  border: OutlineInputBorder(borderSide: BorderSide(color: color)));
+}

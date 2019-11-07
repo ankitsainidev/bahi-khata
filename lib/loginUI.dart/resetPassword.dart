@@ -8,7 +8,9 @@ class ResetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      
       appBar: AppBar(
+        backgroundColor: Colors.teal[600],
         title: Text('Reset Password'),
       ),
       body: MyResetForm(),
@@ -51,6 +53,9 @@ class ResetState extends State<MyResetForm> {
     return Form(
       child: Column(
         children: <Widget>[
+          Padding(
+            padding:EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+            child:
           TextFormField(
             validator: (value) {
               if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -62,9 +67,10 @@ class ResetState extends State<MyResetForm> {
             onChanged: (value) {
               _email = value;
             },
-            decoration: InputDecoration(labelText: 'Email'),
-          ),
-          MaterialButton(
+            decoration: mydecoration('Email',Colors.teal[600]),
+          )),
+          RaisedButton(
+            color: Colors.teal[100],
             onPressed: () {
               if (_formkey.currentState.validate()) {
                 showDialog(
@@ -76,11 +82,21 @@ class ResetState extends State<MyResetForm> {
                 _sendresetlink(context, _email);
               }
             },
-            child: Text('Reset Email'),
+            child: Text('Reset Password'),
           )
         ],
       ),
       key: _formkey,
     );
   }
+}
+
+
+
+InputDecoration mydecoration(label,color){
+  return InputDecoration(labelText: label,
+  labelStyle: TextStyle(color: Colors.black),
+  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  border: OutlineInputBorder(borderSide: BorderSide(color: color)));
 }

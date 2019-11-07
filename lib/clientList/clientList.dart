@@ -26,6 +26,7 @@ class ClientList extends StatelessWidget {
             return Scaffold(
               appBar: MyAppBar.getAppBar(context),
               floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.teal[300],
                 onPressed: () {
                   Navigator.pushNamed(context, '/newClient');
                 },

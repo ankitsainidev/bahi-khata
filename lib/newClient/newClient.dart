@@ -47,6 +47,9 @@ class NCState extends State<NewClientForm> {
                 name = value;
               },
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                labelStyle: TextStyle(color: Colors.black),
                 filled: true,
                 labelText: 'Client Name',
               ),
@@ -57,9 +60,14 @@ class NCState extends State<NewClientForm> {
               onChanged: (value) {
                 number=value;
               },
+              
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                labelStyle: TextStyle(color: Colors.black),
                 filled: true,
                 labelText: 'Contact Number',
+                
               ),
             ),
             TextFormField(
@@ -68,6 +76,9 @@ class NCState extends State<NewClientForm> {
                 email = value;
               },
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                labelStyle: TextStyle(color: Colors.black),
                 filled: true,
                 labelText: 'Email(Optional)',
               ),
@@ -82,6 +93,9 @@ class NCState extends State<NewClientForm> {
               ],
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                labelStyle: TextStyle(color: Colors.black),
                 filled: true,
                 labelText: 'Amount',
               ),
@@ -105,6 +119,9 @@ class NCState extends State<NewClientForm> {
                 remark = value;
               },
               decoration: InputDecoration(
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal[600])),
+                labelStyle: TextStyle(color: Colors.black),
                 filled: true,
                 labelText: 'Remark(Optional)',
               ),
@@ -119,9 +136,12 @@ class NCState extends State<NewClientForm> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  focusColor: Colors.teal[600],
+                  
+                  highlightedBorderColor: Colors.teal[600],
                   child:
-                      Text('Cancel', style: TextStyle(color: Colors.blue[700])),
-                  color: Colors.blue[700],
+                      Text('Cancel', style: TextStyle(color: Colors.teal[300])),
+                  color: Colors.teal[600],
                 ),
                 Spacer(),
                 MaterialButton(
@@ -129,7 +149,7 @@ class NCState extends State<NewClientForm> {
 
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  color: Colors.blue[700],
+                  color: Colors.teal[300],
                   // textTheme: ButtonTextTheme.,
                   onPressed: () {
                     if (formkey.currentState.validate()) {
@@ -196,3 +216,12 @@ class NCState extends State<NewClientForm> {
   }
 }
 
+
+
+InputDecoration mydecoration(label,color){
+  return InputDecoration(labelText: label,
+  labelStyle: TextStyle(color: Colors.black),
+  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: color)),
+  border: OutlineInputBorder(borderSide: BorderSide(color: color)));
+}

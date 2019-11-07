@@ -9,7 +9,7 @@ class CardButton extends StatelessWidget{
   Widget build(BuildContext context) {
    
     return Container(
-      color: Colors.lightBlueAccent,
+      color: Colors.teal[100],
       margin: EdgeInsets.symmetric(vertical: 8,horizontal: 20),
       height: MediaQuery.of(context).size.height/4,
       child: MaterialButton(

@@ -172,27 +172,30 @@ class Login extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Log In'),
+        title: Text('Bahi Khata'),
+        backgroundColor: Colors.teal[600],
       ),
       body: Column(
         children: <Widget>[
           Text(newuser ? 'Verify email first by checking your inbox' : ''),
           MyCustomLogin(),
-          Row(
-            children: <Widget>[
-              MaterialButton(
+          ListTile(
+
+            leading:
+              RaisedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/signUp');
                 },
                 child: Text('Create New Account'),
               ),
-              MaterialButton(
-                onPressed: (){
+              trailing: RaisedButton(
+                
+                onPressed: () {
                   Navigator.pushNamed(context, '/resetPassword');
                 },
                 child: Text('Forgot Password'),
               )
-            ],
+            
           )
         ],
       ),
@@ -242,59 +245,89 @@ class LoginState extends State<MyCustomLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formkey,
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                  .hasMatch(value)) {
-                return 'Enter Valid Email';
-              }
-              print('valid');
-              return null;
-            },
-            // onEditingComplete: ,
-            // autovalidate: true,
-            onChanged: (value) {
-              _email = value;
-              // print(_email);
-            },
-            decoration: InputDecoration(labelText: "Email"),
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        child: Card(
+            child: Form(
+          key: _formkey,
+          child: Column(
+            
+            children: <Widget>[
+              TextFormField(
+                validator: (value) {
+                  if (!RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                    return 'Enter Valid Email';
+                  }
+                  print('valid');
+                  return null;
+                },
+                // onEditingComplete: ,
+                // autovalidate: true,
+                onChanged: (value) {
+                  _email = value;
+                  // print(_email);
+                },
+                decoration: InputDecoration(
+                  hoverColor: Colors.black,
+                  focusColor: Colors.black,
+                    // filled: true,
+                    labelText: "Email",
+                    labelStyle: TextStyle(color: Colors.black),
+                    
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),),
+              ),
+              
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                autocorrect: false,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Password can\'t be empty';
+                  }
+                  return null;
+                },
+                obscureText: true,
+                onChanged: (value) {
+                  _password = value;
+                },
+                
+                
+                decoration: InputDecoration(
+                  hoverColor: Colors.black,
+                  focusColor: Colors.black,
+                    // filled: true,
+                    labelText: "Password",
+                    labelStyle: TextStyle(color: Colors.black),
+                    
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),)
+                    // focusedBorder: UnderlineInputBorder(
+                    //     borderSide: BorderSide(
+                    //         color: Colors.teal, style: BorderStyle.solid))),
+              ),),
+              MaterialButton(
+                color: Colors.teal[100],
+                onPressed: () {
+                  if (_formkey.currentState.validate()) {
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Center(child: CircularProgressIndicator());
+                      },
+                    );
+                    _signInAnonymously(context, _email, _password);
+                  }
+                },
+                child: Text('Log In'),
+              )
+            ],
           ),
-          TextFormField(
-            autocorrect: false,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Password can\'t be empty';
-              }
-              return null;
-            },
-            obscureText: true,
-            onChanged: (value) {
-              _password = value;
-            },
-            decoration: InputDecoration(labelText: "Password"),
-          ),
-          MaterialButton(
-            onPressed: () {
-              if (_formkey.currentState.validate()) {
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Center(child: CircularProgressIndicator());
-                  },
-                );
-                _signInAnonymously(
-                    context, _email, _password);
-              }
-            },
-            child: Text('Log In'),
-          )
-        ],
-      ),
-    );
+        )));
   }
 }
