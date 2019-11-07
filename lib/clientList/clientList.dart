@@ -2,37 +2,51 @@ import 'package:flutter/material.dart';
 import '../share/appBar.dart';
 import './contactCard.dart';
 import '../share/contactInfo.dart';
+import '../models.dart';
+import '../database.dart';
 
 class ClientList extends StatelessWidget {
-  List<String> contacts = ['ankit', 'name'];
-  List<String> another = ['ank', 'john', 'hello'];
+  DatabaseClient mydb = DatabaseClient();
 
   final String routeName = '/clientList';
   @override
   Widget build(BuildContext context) {
-    for (var i = 0; i < 100; i++) {
-      contacts.addAll(another);
-    }
-    return Scaffold(
-      appBar: MyAppBar.getAppBar(context),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pushNamed(context, '/newClient');
-        },
-        child: Icon(Icons.person_add),
-      ),
-      body: ListView.separated(
-        itemCount: 1000,
-        separatorBuilder: (context, index){
-          return Divider(color: Colors.grey[400],);
-        },
-
-        
-        itemBuilder: (ctxt, index){
-          print(index);
-            return ContactCard(ContactInfo('idex'+index.toString()));},
-      ),
-      
+    return FutureBuilder<List<Client>>(
+      future: mydb.clients(),
+      builder: (BuildContext context, AsyncSnapshot<List<Client>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return Text('Press button to start.');
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return Scaffold();
+          case ConnectionState.done:
+            if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+            var clients = snapshot.data;
+            return Scaffold(
+              appBar: MyAppBar.getAppBar(context),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/newClient');
+                },
+                child: Icon(Icons.person_add),
+              ),
+              body: ListView.separated(
+                itemCount: clients.length,
+                separatorBuilder: (context, index) {
+                  return Divider(
+                    color: Colors.grey[400],
+                  );
+                },
+                itemBuilder: (ctxt, index) {
+                  print(index);
+                  return ContactCard(clients[index]);
+                },
+              ),
+            );
+        }
+        return Text('...'); // unreachable
+      },
     );
   }
 }
