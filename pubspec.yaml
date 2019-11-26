@@ -32,6 +32,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.3"
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/bahi_khata_logo.jpeg"
 
 
 # For information on the generic Dart part of this file, see the
